@@ -14,11 +14,17 @@ latest_settings=$(curl -s "$settings_url")
 logo="logo.svg"
 
 dialogCheck() {
-    if [[ ! -e "$dialogBinary" ]]; then
-        echo "Dialog binary not found"
-        echo "Running policy to install dialog"
-        sudo jamf policy -event install-dialog
-        sleep 10
+    # Install SwiftDialog
+    if [[ ! -e "$dialogBinary" ]] || [[ ! -e '/Library/Application Support/Dialog/Dialog.app/Contents/MacOS/Dialog' ]]; then
+        echo "*************************************************************"
+        echo "*****Installing SwiftDialog*****"
+        echo "*************************************************************"
+        sudo rm -f /tmp/SwiftDialog.pkg
+        sleep 2
+        sudo /usr/bin/curl -Lo /tmp/SwiftDialog.pkg https://github.com/swiftDialog/swiftDialog/releases/download/v2.5.5/dialog-2.5.5-4802.pkg
+        sudo installer -pkg /tmp/SwiftDialog.pkg -target /
+    else
+        echo "SwiftDialog already installed. Version: $(/usr/local/bin/dialog -v)"
     fi
 }
 
