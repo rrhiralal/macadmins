@@ -18,7 +18,7 @@ A comprehensive installation script that handles the entire lifecycle of the Cla
 **Usage:**
 This script is typically run via a management tool (like Jamf Pro) or manually with root privileges. It accepts arguments for the settings URL and Node version.
 
-### `claude_code_settings_updates_clean.sh`
+### `claude_code_settings_updates.sh`
 
 A lightweight script designed to keep the Claude Code configuration in sync.
 
